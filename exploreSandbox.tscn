@@ -1,0 +1,162 @@
+[gd_scene load_steps=31 format=1]
+
+[ext_resource path="res://MapManager.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Explorer.gd" type="Script" id=2]
+[ext_resource path="res://assets/stand.png" type="Texture" id=3]
+[ext_resource path="res://assets/individual pngs for walk/New Frames/whaaBadWalkExport0.png" type="Texture" id=4]
+[ext_resource path="res://assets/individual pngs for walk/New Frames/whaaBadWalkExport1.png" type="Texture" id=5]
+[ext_resource path="res://assets/individual pngs for walk/New Frames/whaaBadWalkExport2.png" type="Texture" id=6]
+[ext_resource path="res://assets/individual pngs for walk/New Frames/whaaBadWalkExport3.png" type="Texture" id=7]
+[ext_resource path="res://assets/individual pngs for walk/New Frames/whaaBadWalkExport4.png" type="Texture" id=8]
+[ext_resource path="res://assets/individual pngs for walk/New Frames/whaaBadWalkExport5.png" type="Texture" id=9]
+[ext_resource path="res://assets/individual pngs for walk/New Frames/whaaBadWalkExport6.png" type="Texture" id=10]
+[ext_resource path="res://assets/individual pngs for walk/New Frames/whaaBadWalkExport7.png" type="Texture" id=11]
+[ext_resource path="res://assets/individual jump frames/jump anim Frame 2.png" type="Texture" id=12]
+[ext_resource path="res://assets/individual jump frames/jump anim Frame 3.png" type="Texture" id=13]
+[ext_resource path="res://assets/individual jump frames/jump anim Frame 4.png" type="Texture" id=14]
+[ext_resource path="res://assets/individual jump frames/jump anim Frame 5.png" type="Texture" id=15]
+[ext_resource path="res://assets/individual jump frames/jump anim Frame 6.png" type="Texture" id=16]
+[ext_resource path="res://assets/individual jump frames/jump anim Frame 7.png" type="Texture" id=17]
+[ext_resource path="res://assets/individual jump frames/jump anim Frame 8.png" type="Texture" id=18]
+[ext_resource path="res://assets/individual jump frames/jump anim Frame 9.png" type="Texture" id=19]
+[ext_resource path="res://assets/individual jump frames/jump anim Frame 10.png" type="Texture" id=20]
+[ext_resource path="res://assets/individual jump frames/jump anim Frame 11.png" type="Texture" id=21]
+[ext_resource path="res://assets/individual jump frames/jump anim Frame 12.png" type="Texture" id=22]
+[ext_resource path="res://assets/individual jump frames/jump anim Frame 13.png" type="Texture" id=23]
+[ext_resource path="res://assets/pixel boulder.png" type="Texture" id=24]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 12.8757 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+} ]
+
+[sub_resource type="SpriteFrames" id=6]
+
+animations = [ {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), null ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 0, -10, 8.66025, 5, -8.66025, 5 )
+
+[sub_resource type="RectangleShape2D" id=5]
+
+custom_solver_bias = 0.0
+extents = Vector2( 22.3811, 15.8439 )
+
+[node name="exploreSandbox" type="Node2D"]
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="MapManager" parent="Map" instance=ExtResource( 1 )]
+
+[node name="Explorer" type="KinematicBody2D" parent="."]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1.73077, 64, 233.5 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 2 )
+
+[node name="Stand" type="Sprite" parent="Explorer"]
+
+transform/pos = Vector2( 64.3766, 227.922 )
+texture = ExtResource( 3 )
+
+[node name="Walk" type="AnimatedSprite" parent="Explorer"]
+
+visibility/visible = false
+transform/pos = Vector2( 62.9459, 227.574 )
+frames = SubResource( 2 )
+animation = "default"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Explorer"]
+
+visibility/visible = false
+transform/pos = Vector2( 64.9459, 229.574 )
+transform/scale = Vector2( 1, 1 )
+frames = SubResource( 6 )
+animation = "default"
+frame = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Explorer"]
+
+transform/pos = Vector2( 64, 233.5 )
+transform/scale = Vector2( 1, 1.73077 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+input/pickable = false
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 10.7115, 0, 0, 2.09615, 105.567, 277.759 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 4 )
+shapes/1/transform = Matrix32( 27.5383, 0, 0, 6.34978, 352, 256 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 5 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 271.846, 212.3 )
+shapes/2/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+
+transform/pos = Vector2( 105.567, 277.759 )
+transform/scale = Vector2( 10.7115, 2.09615 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 0
+
+[node name="CollisionShape2D 2" type="CollisionShape2D" parent="StaticBody2D"]
+
+editor/display_folded = true
+transform/pos = Vector2( 352, 256 )
+transform/scale = Vector2( 27.5383, 6.34978 )
+shape = SubResource( 4 )
+trigger = false
+_update_shape_index = 1
+
+[node name="Node" type="Node" parent="StaticBody2D/CollisionShape2D 2"]
+
+[node name="CollisionShape2D 3" type="CollisionShape2D" parent="StaticBody2D"]
+
+transform/pos = Vector2( 271.846, 212.3 )
+shape = SubResource( 5 )
+trigger = false
+_update_shape_index = 2
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D"]
+
+transform/pos = Vector2( 270.769, 211.455 )
+texture = ExtResource( 24 )
+
+
